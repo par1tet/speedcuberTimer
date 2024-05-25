@@ -1,8 +1,59 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
 .timer-container {
+    display: flex;
     position: absolute;
+
+    justify-content: center;
+    align-items: center;
+    width: 82%;
+    height: 82%;
+    background-color: rgb(189, 2, 2);
+    top: 18%;
+    left: 18%;
+}
+
+.timer-pad {
+    position: absolute;
+
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 50px;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.settings-panel {
+    display: flex;
+
+    width: 100%;
+    height: 18%;
+    background-color: rgb(168, 168, 90);
+}
+
+.control-panel {
+    display: flex;
+
+    width: 18%;
+    height: 100%;
+    background-color: yellow;
+}
+
+.scrample-panel {
+    display: flex;
+
+    width: 82%;
+    height: 18%;
+    background-color: rgb(139, 139, 139);
+}
+
+.main {
+    display: flex;
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
 }
