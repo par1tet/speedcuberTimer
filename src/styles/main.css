@@ -9,11 +9,15 @@ body {
 
     justify-content: center;
     align-items: center;
-    width: 85%;
-    height: 82%;
+    width: calc(100% - 230px);
+    height: 84%;
     background-color: rgb(189, 2, 2);
-    top: 18%;
-    left: 15%;
+    top: 16%;
+    left: 230px;
+}
+
+.timer-container > span {
+    position: fixed;
 }
 
 .timer-pad {
@@ -30,23 +34,23 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
-    height: 18%;
+    height: 16%;
     background-color: rgb(168, 168, 90);
 }
 
 .control-panel {
     display: flex;
 
-    width: 15%;
+    width: 230px;
     height: 100%;
     background-color: yellow;
 }
 
-.scrample-panel {
+.scramble-panel {
     display: flex;
 
-    width: 85%;
-    height: 18%;
+    width: calc(100% - 230px);
+    height: 16%;
     background-color: rgb(139, 139, 139);
 }
 
@@ -86,9 +90,11 @@ body {
 .settings-window {
     position: absolute;
 
-    background-color: aqua;
+    background-color: none;
     width: 65%;
     height: 80%;
+
+    border-radius: 10px;
 
     top: 50%;
     left: 50%;
@@ -96,6 +102,10 @@ body {
 
 
     z-index: 2;
+}
+
+.settings-window > div {
+    border-radius: 10px;
 }
 
 .window-title {
@@ -120,9 +130,25 @@ body {
 .window-title > button {
     display: flex;
     justify-content: center;
+    border-radius: 10px;
+    border: 0px;
     width: 59px;
 }
 
 .window-title > button > img {
     width: 59px;
+}
+
+.settings {
+    position: absolute;
+
+    top: 8%;
+
+    border-radius: 10px;
+
+
+
+    width: 100%;
+    height: 92%;
+    background-color: blue;
 }

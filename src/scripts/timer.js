@@ -1,6 +1,7 @@
-sptimerSec = document.getElementById('sptimer-sec')
-sptimerMs = document.getElementById('sptimer-ms')
-point = document.getElementById('point')
+let sptimerSec = document.getElementById('sptimer-sec')
+let sptimerMs = document.getElementById('sptimer-ms')
+let point = document.getElementById('point')
+
 
 let isSolving = false;// Проверка на собирание кубика
 let timerInterval = 0;
