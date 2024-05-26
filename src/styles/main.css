@@ -9,26 +9,26 @@ body {
 
     justify-content: center;
     align-items: center;
-    width: 82%;
+    width: 85%;
     height: 82%;
     background-color: rgb(189, 2, 2);
     top: 18%;
-    left: 18%;
+    left: 15%;
 }
 
 .timer-pad {
     position: absolute;
 
-    top: 50%;
-    left: 50%;
+    top: 45%;
+    left: 45%;
     transform: translate(-50%, -50%);
-    font-size: 50px;
+    font-size: 800%;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .settings-panel {
-    display: flex;
-
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
     height: 18%;
     background-color: rgb(168, 168, 90);
@@ -37,7 +37,7 @@ body {
 .control-panel {
     display: flex;
 
-    width: 18%;
+    width: 15%;
     height: 100%;
     background-color: yellow;
 }
@@ -45,7 +45,7 @@ body {
 .scrample-panel {
     display: flex;
 
-    width: 82%;
+    width: 85%;
     height: 18%;
     background-color: rgb(139, 139, 139);
 }
@@ -54,6 +54,75 @@ body {
     display: flex;
     position: absolute;
 
+    z-index: 1;
+
+
     height: 100%;
     width: 100%;
+}
+
+.settings-button {
+    border: 1px solid #7c7c7c;
+    background-color: #7c7c7c;
+    font-size: 85%;
+    font-weight: 800;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.settings-button > img {
+    width: 60px;
+    height: 60px;
+
+
+    background-size: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.settings-button:hover {
+    border: 1px solid red;
+}
+
+.settings-window {
+    position: absolute;
+
+    background-color: aqua;
+    width: 65%;
+    height: 80%;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+    z-index: 2;
+}
+
+.window-title {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 8%;
+
+    background-color: rgb(53, 103, 103);
+}
+
+.window-title > span {
+    font-size: 200%;
+    font-weight: 900;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top: 1%;
+}
+
+.window-title > button {
+    display: flex;
+    justify-content: center;
+    width: 59px;
+}
+
+.window-title > button > img {
+    width: 59px;
 }

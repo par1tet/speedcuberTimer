@@ -31,4 +31,4 @@ function timerLogic(event){
     }
 }
 
-document.addEventListener('keydown', timerLogic)
+document.addEventListener('keydown', timerLogic);
