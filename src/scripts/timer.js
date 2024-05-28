@@ -6,13 +6,33 @@ let point = document.getElementById('point')
 let isSolving = false;// Проверка на собирание кубика
 let timerInterval = 0;
 
+function renderScrumble(){
+    fetch("http://127.0.0.1:8016/scrumble")
+    .then(res => res.json())
+    .then(dataCub => {
+        document.querySelector(".scramble-panel").innerHTML = dataCub.scrumble
+    })
+}
+function cubeGenerate(){
+    fetch("http://127.0.0.1:8016/scrumble", {
+        method : "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            codepost : 1// 1 - Создать скрамбл, и сделать разметку куба
+        })
+    })
+}
+
 
 function timerLogic(event){
-    if (event.key !== ' '){// Смена по нажатию
-        console.log('timerjl')
+    if (event.key !== ' '){// Тест на нажатие пробела
         return 0
     }
-    if (!isSolving){// Если не собирает, и нажимает на пробел
+    fetch("/scrumble")
+    if (!isSolving){// Запуск таймера
         point.innerHTML = "."
         sptimerSec.innerHTML = "0";
         sptimerMs.innerHTML = "0";
@@ -24,7 +44,9 @@ function timerLogic(event){
                 sptimerMs.innerHTML = +sptimerMs.innerHTML + 1;
             }
         },10)
-    }else{
+    }else{// Остановления таймера
+        cubeGenerate()
+        renderScrumble()
         clearInterval(timerInterval)
     }
     if (event.key === ' '){// Смена по нажатию
