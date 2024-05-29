@@ -62,6 +62,7 @@ def main():
 
 
 
+
 # Добавление статических файлов
 
 @app.get("/src/styles/main.css")
@@ -76,6 +77,14 @@ def js_timer():
 def js_button_settings():
     return FileResponse("src/scripts/buttonSettings.js")
 
+@app.get("/src/scripts/buttonAutors.js")
+def js_button_settings():
+    return FileResponse("src/scripts/buttonAutors.js")
+
+@app.get("/src/assets/img/autors.png")
+def js_button_settings():
+    return FileResponse("src/assets/img/autors.png")
+
 @app.get("/src/assets/img/hidebutton.png")
 def js_button_settings():
     return FileResponse("src/assets/img/hidebutton.png")
@@ -85,5 +94,5 @@ def js_button_settings():
     return FileResponse("src/assets/img/settings.png")
 
 if __name__ == '__main__':
-    os.system(f"uvicorn main:app --port {8001} --reload")
+    os.system(f"uvicorn main:app --port {8002} --reload")
     

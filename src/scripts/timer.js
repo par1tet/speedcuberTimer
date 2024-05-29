@@ -7,7 +7,6 @@ let isSolving = false;// Проверка на собирание кубика
 let timerInterval = 0;
 
 function renderCube(cubeMap){
-    console.log(123)
     scramblePad = document.querySelector(".scramble-pad")// Получаем элемент на котором будем рисовать
     scramblePad.innerHTML = ''// Очищаем
     for (let i = 0;i < cubeMap.length;i++){
@@ -50,7 +49,7 @@ function renderCube(cubeMap){
 }
 
 function renderScrumble(){
-    fetch("http://127.0.0.1:8001/scrumble")
+    fetch("http://127.0.0.1:8002/scrumble")
     .then(res => res.json())
     .then(dataCub => {
         document.querySelector(".scramble-panel").innerHTML = `<span class='scrumble-text'>${dataCub.scrumble}</span>`
@@ -58,7 +57,7 @@ function renderScrumble(){
     })
 }
 function cubeGenerate(){
-    fetch("http://127.0.0.1:8001/scrumble", {
+    fetch("http://127.0.0.1:8002/scrumble", {
         method : "POST",
         headers: {
             "Accept": "application/json",
@@ -70,6 +69,10 @@ function cubeGenerate(){
     })
 }
 
+if (document.querySelector(".scramble-panel").innerHTML === ''){
+    cubeGenerate()
+    renderScrumble()
+}
 
 function timerLogic(event){
     if (event.key !== ' '){// Тест на нажатие пробела

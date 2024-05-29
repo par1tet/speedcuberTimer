@@ -1,7 +1,14 @@
 let settingsButton = document.getElementById('main-settings')
 let divMain = document.querySelector('.main')
-let settingsBC = '#fca2f3ff'
-let windowTitleBC = '#73524dff'
+
+if (localStorage.getItem('windowTitleBC') === null){
+    localStorage.setItem('windowTitleBC', '#fca2f3ff')
+    console.log('test')
+}
+if (localStorage.getItem('windowBC') === null){
+    localStorage.setItem('windowBC', '#fca2f3ff')
+    console.log('test')
+}
 
 function settingsButtonMouseOver(event){
     settingsButton.innerHTML = `НАСТ-\nРОЙКИ`
@@ -15,7 +22,7 @@ function hideWindowSettings(){
 }
 
 function openSettings(){
-    if (document.querySelector('.settings-window') !== null){
+    if (document.querySelector('.autors-window') !== null || document.querySelector('.settings-window') !== null){
         return 0
     }
     let settingsWindow = document.createElement('div')// Создаем div
@@ -39,7 +46,7 @@ function openSettings(){
     let title = document.createElement('span')// Создание оглавления
     title.innerHTML = 'НАСТРОЙКИ'
     windowTitle.append(title)
-    windowTitle.style.background = windowTitleBC
+    windowTitle.style.background = localStorage.getItem('windowTitleBC')
 
     let hideButton = document.createElement('button')// Создание кнопки скрытия
     hideButton.addEventListener('click', hideWindowSettings)
@@ -51,7 +58,7 @@ function openSettings(){
 
     let settings = document.createElement('div')
     settings.classList.add('settings')
-    settings.style.backgroundColor = settingsBC;
+    settings.style.backgroundColor = localStorage.getItem('windowBC');
 
     // -------------------------------------------
     // Добавления окна в Html
@@ -74,7 +81,7 @@ function openSettings(){
     // ------------------------------------------------------------------------------------------
     // Функция позволяющия оптимизоровать код, создает новые элементы смены цвета
 
-    function createChoiceOfColor(BCWhat, Text, changeColor, linkedValue){
+    function createChoiceOfColor(BCWhat, Text, changeColor, linkedValue, hex = false){
         let choiceBCContainer = document.createElement('div')// Создание контейнера с input-ом и span-ом
     
         let textBC = document.createElement('span')// Создание текста
@@ -89,20 +96,25 @@ function openSettings(){
         let choiceInput = document.getElementById(`choiceB${BCWhat}`)// Получаем элемент
         choiceInput.whatDo = changeColor// Функция смены цвета
 
-        // ОСТОРОЖНО!!! СМОТРЯ НА ЭТОТ СЛЕДУЙЩИЙ КОД ВЫ МОЖЕТЕ УПАСТЬ В ОБМОРОК, И БОЛЬШЕ НЕ ВСТАТЬ!!!!!!
 
-        rgbColor = linkedValue.slice(3).replace('(','').replace(')','').split(',')// Получаем массив rgb строк
+        if (hex){// Если передан цвет в hex формате
+            choiceInput.value = linkedValue
+        }else{// Если в rgb
+            // ОСТОРОЖНО!!! СМОТРЯ НА ЭТОТ СЛЕДУЙЩИЙ КОД ВЫ МОЖЕТЕ УПАСТЬ В ОБМОРОК, И БОЛЬШЕ НЕ ВСТАТЬ!!!!!!
 
-        for (let i = 0;i < 3;i++){ rgbColor[i] = +rgbColor[i] }// Преобразуем его в массив чисел
+            rgbColor = linkedValue.slice(3).replace('(','').replace(')','').split(',')// Получаем массив rgb строк
 
-        // КУЛЬМИНАЦИЯ!!!
-        // (любители чистого кода уже умерли)
-        choiceInput.value =// Здесь мы преобразуем все числа из массива rgb в hex формат
-        ("#" + ((rgbColor[0]).toString(16).length == 1 ? "0" + (rgbColor[0]).toString(16) : (rgbColor[0]).toString(16))// Сначала red
-        + ((rgbColor[1]).toString(16).length == 1 ? "0" + (rgbColor[1]).toString(16) : (rgbColor[1]).toString(16))// Потом green
-        + ((rgbColor[2]).toString(16).length == 1 ? "0" + (rgbColor[2]).toString(16) : (rgbColor[2]).toString(16)));// И наканец это все кончилось
+            for (let i = 0;i < 3;i++){ rgbColor[i] = +rgbColor[i] }// Преобразуем его в массив чисел
 
-        // ЭТОТ АДСКИЙ КОД ЗАКОНЧИЛСЯ
+            // КУЛЬМИНАЦИЯ!!!
+            // (любители чистого кода уже умерли)
+            choiceInput.value =// Здесь мы преобразуем все числа из массива rgb в hex формат
+            ("#" + ((rgbColor[0]).toString(16).length == 1 ? "0" + (rgbColor[0]).toString(16) : (rgbColor[0]).toString(16))// Сначала red
+            + ((rgbColor[1]).toString(16).length == 1 ? "0" + (rgbColor[1]).toString(16) : (rgbColor[1]).toString(16))// Потом green
+            + ((rgbColor[2]).toString(16).length == 1 ? "0" + (rgbColor[2]).toString(16) : (rgbColor[2]).toString(16)));// И наканец это все кончилось
+
+            // ЭТОТ АДСКИЙ КОД ЗАКОНЧИЛСЯ
+        }
 
         choiceInput.addEventListener('input', changeC)// Слушаем изменение цвета
     }
@@ -132,32 +144,18 @@ function openSettings(){
         buttons = document.querySelectorAll('.settings-button');
         for (let i = 0;i < 6;i++){
             buttons[i].style.backgroundColor = event.target.value;
-
-            // If with border
-            // Если с обводкой
-            // function hexToRgb(hex) {
-            //     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            //     return result ? {
-            //         r: parseInt(result[1], 16),
-            //         g: parseInt(result[2], 16),
-            //         b: parseInt(result[3], 16)
-            //     } : null;
-            // }
-            // rgb = hexToRgb(event.target.value)
-            // buttons[i].style.border = `1px solid rgb(${rgb.r},${rgb.g},${rgb.b})`
         }
-
     }, getComputedStyle(document.querySelector('.settings-button')).backgroundColor)
 
-    createChoiceOfColor('Settings','Цвет заднего фона окна настроек: ', event => {
+    createChoiceOfColor('Settings','Цвет заднего фона окна: ', event => {
         document.querySelector('.settings').style.backgroundColor = event.target.value;
-        settingsBC = event.target.value
-    }, getComputedStyle(document.querySelector('.settings')).backgroundColor)
+        localStorage.setItem('windowBC', event.target.value)
+    }, localStorage.getItem('windowBC'), true)
 
-    createChoiceOfColor('WindowTitle','Цвет заднего фона заголовка настроек: ', event => {
+    createChoiceOfColor('WindowTitle','Цвет заднего фона заголовка: ', event => {
         document.querySelector('.window-title').style.backgroundColor = event.target.value;
-        windowTitleBC = event.target.value
-    }, getComputedStyle(document.querySelector('.window-title')).backgroundColor)
+        localStorage.setItem('windowTitleBC', event.target.value)
+    }, localStorage.getItem('windowTitleBC'), true)
 
     createChoiceOfColor('Text','Цвет текста: ', event => {
         document.querySelector('body').style.color = event.target.value;
