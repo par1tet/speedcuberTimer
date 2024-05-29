@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Body
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from cubeLogic.cubic import Cubic
+import os
 import random
 import json
 
@@ -12,6 +14,7 @@ users = {
 @app.post("/scrumble")
 async def post_test(data = Body()):
     if data['codepost'] == 1:
+        # Создание рандомнового скрамбла
         scrumble = ''
         newscr = []
         for i in range(0,random.randint(15,23)):
@@ -35,7 +38,14 @@ async def post_test(data = Body()):
         with open('cube.json', 'w') as cubeData:
             data["scrumble"] = newscr
             json.dump(data, cubeData)
-            
+        # Создание кубика со скрамблом
+        cub = Cubic()
+        cub.Scrumble(newscr)
+        with open('cube.json', 'r') as cubeData:
+            data = json.load(cubeData)
+        with open('cube.json', 'w') as cubeData:
+            data["cubeMap"] = cub.getCubMap()
+            json.dump(data,cubeData,indent=2,ensure_ascii=False)
     return JSONResponse(content=data)
 
 @app.get("/scrumble")
@@ -73,3 +83,7 @@ def js_button_settings():
 @app.get("/src/assets/img/settings.png")
 def js_button_settings():
     return FileResponse("src/assets/img/settings.png")
+
+if __name__ == '__main__':
+    os.system(f"uvicorn main:app --port {8001} --reload")
+    
