@@ -130,10 +130,10 @@ function openSettings(){
         document.querySelector('.timer-container').style.backgroundColor = event.target.value;
     }, getComputedStyle(document.querySelector('.timer-container')).backgroundColor)
 
-    createChoiceOfColor('Control','Цвет заднего фона контрольной панели: ', event => {
-        document.querySelector('.control-panel').style.backgroundColor = event.target.value;
+    createChoiceOfColor('Control','Цвет заднего фона панели сборок: ', event => {
+        document.querySelector('.solves-panel').style.backgroundColor = event.target.value;
         
-    }, getComputedStyle(document.querySelector('.control-panel')).backgroundColor)
+    }, getComputedStyle(document.querySelector('.solves-panel')).backgroundColor)
     
     createChoiceOfColor('Scramble','Цвет заднего фона скрамбла: ', event => {
         document.querySelector('.scramble-panel').style.backgroundColor = event.target.value;
@@ -160,6 +160,8 @@ function openSettings(){
     createChoiceOfColor('Text','Цвет текста: ', event => {
         document.querySelector('body').style.color = event.target.value;
     }, getComputedStyle(document.querySelector('body')).color)
+
+    // Создание чекбокосов
 }
 
 

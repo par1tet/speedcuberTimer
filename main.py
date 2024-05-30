@@ -2,14 +2,18 @@ from fastapi import FastAPI, Body
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from cubeLogic.cubic import Cubic
+from database import async_main
+from requests_db import add_solv, get_solves
 import os
 import random
 import json
+import asyncio
 
 app = FastAPI()
-users = {
-    "name" : 'Alex'
-}
+
+@app.get("/")
+def main():
+    return FileResponse("index.html")
 
 @app.post("/scrumble")
 async def post_test(data = Body()):
@@ -50,17 +54,18 @@ async def post_test(data = Body()):
 
 @app.get("/scrumble")
 async def get_user():
-    print(123)
     with open('cube.json', 'r') as usersData:
         return JSONResponse(content=json.load(usersData))
     
-@app.get("/")
-def main():
-    return FileResponse("index.html")
+@app.post("/newSolve")
+async def new_solve(data = Body()):
+    if isinstance(data['scrumble'], str):
+        await add_solv(data['time'], data['scrumble'])
+    return JSONResponse({'solves': await get_solves()})
 
-
-
-
+@app.get("/newSolve")
+async def return_solve():
+    return JSONResponse({'solves': await get_solves()})
 
 
 # Добавление статических файлов
@@ -94,5 +99,5 @@ def js_button_settings():
     return FileResponse("src/assets/img/settings.png")
 
 if __name__ == '__main__':
+    asyncio.run(async_main())
     os.system(f"uvicorn main:app --port {8002} --reload")
-    

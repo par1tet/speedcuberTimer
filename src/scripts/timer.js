@@ -69,9 +69,31 @@ function cubeGenerate(){
     })
 }
 
+function solvesShow(dataSolves){
+    solvesPanel = document.querySelector('.solves-panel')
+    solvesPanel.innerHTML = ''
+    for (let i = 0;i < dataSolves.solves.length;i++){
+        let newSolve = document.createElement('div')
+
+        let time = document.createElement('span')// Время сборки
+        let number = document.createElement('span')// Номер сборки
+
+        time.innerHTML = dataSolves.solves[i].time
+        number.innerHTML = `${i+1}: `
+
+        newSolve.append(number)
+        newSolve.append(time)
+
+        solvesPanel.prepend(newSolve)
+    }
+}
+
 if (document.querySelector(".scramble-panel").innerHTML === ''){
     cubeGenerate()
     renderScrumble()
+    fetch("http://127.0.0.1:8002/newSolve")
+    .then(res => res.json())
+    .then(dataSolves => {solvesShow(dataSolves)})
 }
 
 function timerLogic(event){
@@ -92,9 +114,25 @@ function timerLogic(event){
             }
         },10)
     }else{// Остановления таймера
+        time = +`${document.querySelector('.timer-counter-sec').innerHTML}.${document.querySelector('.timer-counter-ms').innerHTML}`
+        scrumble = `${document.querySelector('.scrumble-text').innerHTML}`
+        fetch("http://127.0.0.1:8002/newSolve", {
+            method : "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                time: time,
+                scrumble: scrumble
+            })
+        })
+        .then(res => res.json())
+        .then(dataSolves => {solvesShow(dataSolves)})
         cubeGenerate()
         renderScrumble()
         clearInterval(timerInterval)
+
     }
     if (event.key === ' '){// Смена по нажатию
         isSolving = !isSolving;
