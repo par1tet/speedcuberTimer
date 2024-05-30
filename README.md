@@ -17,11 +17,11 @@ source .venv/bin/activate
 
 <h1>Fourth step</h1>
 Download a fastAPI<br>
-pip install fastapi uvicorn
+pip install fastapi uvicorn sqlalchemt aiosqlite
 
 <h1>Last step</h1>
 Start the programm<br>
 python3 main.py<br>
 
-If you got it right, go to the website 
+If you got it right, go to the website
 http://127.0.0.1:8002/
