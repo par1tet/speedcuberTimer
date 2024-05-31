@@ -84,11 +84,28 @@ function solvesShow(dataSolves){
         let time = document.createElement('td')// Время сборки
         let number = document.createElement('td')// Номер сборки
 
+        let lastAo5 = document.createElement('td')// Среднее из последних пяти
+        let lastFiveSum = 0
+        if (i >= 4){
+        for(let j = 0;j < 5;j++){
+            lastFiveSum += dataSolves.solves[i - j].time
+        }lastAo5.innerHTML = (lastFiveSum / 5).toFixed(3)}else{lastAo5.innerHTML = ''}
+        
+
+        let lastAo12 = document.createElement('td')// Среднее из последних двенадцати
+        let last12Sum = 0
+        if (i >= 11){
+        for(let j = 0;j < 12;j++){
+            last12Sum += dataSolves.solves[i - j].time
+        }lastAo12.innerHTML = (last12Sum / 12).toFixed(3)}else{lastAo12.innerHTML = ''}
+
         time.innerHTML = dataSolves.solves[i].time
         number.innerHTML = i+1
 
         newSolve.append(number)
         newSolve.append(time)
+        newSolve.append(lastAo5)
+        newSolve.append(lastAo12)
 
         solvesTable.prepend(newSolve)
     }
@@ -98,12 +115,18 @@ function solvesShow(dataSolves){
 
     let time = document.createElement('td')// Время сборки
     let number = document.createElement('td')// Номер сборки
+    let lastAo5 = document.createElement('td')// Среднее из последних пяти
+    let lastAo12 = document.createElement('td')// Среднее из последних двенадцати
 
     time.innerHTML = 'Время'
     number.innerHTML = '№'
+    lastAo5.innerHTML = 'ao5'
+    lastAo12.innerHTML = 'ao12'
 
     title.append(number)
     title.append(time)
+    title.append(lastAo5)
+    title.append(lastAo12)
 
     solvesTable.prepend(title)
 

@@ -86,6 +86,10 @@ def js_button_settings():
 def js_button_settings():
     return FileResponse("src/scripts/buttonAutors.js")
 
+@app.get("/src/scripts/solvesPanelSettings.js")
+def js_button_settings():
+    return FileResponse("src/scripts/solvesPanelSettings.js")
+
 @app.get("/src/assets/img/autors.png")
 def js_button_settings():
     return FileResponse("src/assets/img/autors.png")
