@@ -72,20 +72,42 @@ function cubeGenerate(){
 function solvesShow(dataSolves){
     solvesPanel = document.querySelector('.solves-panel')
     solvesPanel.innerHTML = ''
-    for (let i = 0;i < dataSolves.solves.length;i++){
-        let newSolve = document.createElement('div')
 
-        let time = document.createElement('span')// Время сборки
-        let number = document.createElement('span')// Номер сборки
+    solvesTable = document.createElement('table')
+    solvesTable.classList.add('solves-table')
+
+    // Создание сборок
+
+    for (let i = 0;i < dataSolves.solves.length;i++){
+        let newSolve = document.createElement('tr')
+
+        let time = document.createElement('td')// Время сборки
+        let number = document.createElement('td')// Номер сборки
 
         time.innerHTML = dataSolves.solves[i].time
-        number.innerHTML = `${i+1}: `
+        number.innerHTML = i+1
 
         newSolve.append(number)
         newSolve.append(time)
 
-        solvesPanel.prepend(newSolve)
+        solvesTable.prepend(newSolve)
     }
+
+    // Создание заголовка
+    let title = document.createElement('tr')
+
+    let time = document.createElement('td')// Время сборки
+    let number = document.createElement('td')// Номер сборки
+
+    time.innerHTML = 'Время'
+    number.innerHTML = '№'
+
+    title.append(number)
+    title.append(time)
+
+    solvesTable.prepend(title)
+
+    solvesPanel.append(solvesTable)
 }
 
 if (document.querySelector(".scramble-panel").innerHTML === ''){

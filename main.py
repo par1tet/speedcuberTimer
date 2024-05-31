@@ -106,3 +106,4 @@ if __name__ == '__main__':
         data["scrumble"] = ''
         json.dump(data,cubeData,indent=2,ensure_ascii=False)
     os.system(f"uvicorn main:app --port {8002} --reload")
+    

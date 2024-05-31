@@ -1,6 +1,6 @@
 .venv/
 .vscode/
 __pycache__/
-db.sqlite3
 cubeLogic/__pycache__/
+db.sqlite3
 cube.json
