@@ -10,13 +10,16 @@ If you don't have python, download it.
 <h1>Third step</h1>
 Set up a virtual environment and start him
 <p>python -m venv .venv</p><br>
+
+start .venv
+
 Windows:<br>
 .venv\Scripts\activate<br>
 macOS и Linux:<br>
 source .venv/bin/activate
 
 <h1>Fourth step</h1>
-Download a fastAPI<br>
+Download a librares<br>
 pip install fastapi uvicorn sqlalchemt aiosqlite
 
 <h1>Last step</h1>
