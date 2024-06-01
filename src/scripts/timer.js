@@ -1,3 +1,5 @@
+import { showStatistic } from "./solvesPanelSettings.js";
+
 let sptimerSec = document.getElementById('sptimer-sec')
 let sptimerMs = document.getElementById('sptimer-ms')
 let point = document.getElementById('point')
@@ -7,11 +9,11 @@ let isSolving = false;// Проверка на собирание кубика
 let timerInterval = 0;
 
 function renderCube(cubeMap){
-    scramblePad = document.querySelector(".scramble-pad")// Получаем элемент на котором будем рисовать
+    let scramblePad = document.querySelector(".scramble-pad")// Получаем элемент на котором будем рисовать
     scramblePad.innerHTML = ''// Очищаем
     for (let i = 0;i < cubeMap.length;i++){
         for (let j = 0;j < cubeMap[0].length;j++){
-            newDiv = document.createElement('div')// Создаем элемент цвета кубика
+            let newDiv = document.createElement('div')// Создаем элемент цвета кубика
             newDiv.style.border = '2.5px black solid'
             switch (cubeMap[i][j]){
                 case 'W':
@@ -70,10 +72,10 @@ function cubeGenerate(){
 }
 
 function solvesShow(dataSolves){
-    solvesPanel = document.querySelector('.solves-panel')
+    let solvesPanel = document.querySelector('.solves-panel')
     solvesPanel.innerHTML = ''
 
-    solvesTable = document.createElement('table')
+    let solvesTable = document.createElement('table')
     solvesTable.classList.add('solves-table')
 
     // Создание сборок
@@ -159,8 +161,8 @@ function timerLogic(event){
             }
         },10)
     }else{// Остановления таймера
-        time = +`${document.querySelector('.timer-counter-sec').innerHTML}.${document.querySelector('.timer-counter-ms').innerHTML}`
-        scrumble = `${document.querySelector('.scrumble-text').innerHTML}`
+        let time = +`${document.querySelector('.timer-counter-sec').innerHTML}.${document.querySelector('.timer-counter-ms').innerHTML}`
+        let scrumble = `${document.querySelector('.scrumble-text').innerHTML}`
         fetch("http://127.0.0.1:8002/newSolve", {
             method : "POST",
             headers: {
@@ -177,7 +179,7 @@ function timerLogic(event){
         cubeGenerate()
         renderScrumble()
         clearInterval(timerInterval)
-
+        showStatistic()
     }
     if (event.key === ' '){// Смена по нажатию
         isSolving = !isSolving;

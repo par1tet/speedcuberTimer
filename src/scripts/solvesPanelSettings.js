@@ -1,7 +1,9 @@
-panelDiv = document.createElement('div')
+let panelDiv = document.createElement('div')
 panelDiv.classList.add('solves-settings-panel')
 
-function showStatistic(){
+export function showStatistic(){
+    panelDiv.innerHTML = ''
+
     let tableStatistic = document.createElement('table')
 
     let title = document.createElement('tr')
@@ -246,7 +248,8 @@ function showStatistic(){
     tableStatistic.append(worstSolves)
 
     panelDiv.append(tableStatistic)
+
+    document.querySelector('.solves-panel').before(panelDiv)
 }
 
 showStatistic()
-document.querySelector('.solves-panel').before(panelDiv)
