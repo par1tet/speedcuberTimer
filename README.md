@@ -2,7 +2,7 @@ What to do to make it work.
 
 <h1>First step</h1>
 Clon repo
-<p>git clon https://github.com/par1tet/speedcuberTimer.git</p>
+<p>git clone https://github.com/par1tet/speedcuberTimer.git</p>
 
 <h1>Second step</h1>
 If you don't have python, download it.
